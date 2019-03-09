@@ -6,8 +6,8 @@
       </div>
       <div class="menu">
         <ul>
-          <li><a href='#whatis'>What is Patreaion?</a></li>
-          <li><a href=''>Post a subscription</a></li>
+          <li><router-link to="/#whatis">What is Patreaion?</router-link></li>
+          <li><router-link to="/post">Post a subscription</router-link></li>
         </ul>
       </div>
     </div>

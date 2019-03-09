@@ -4,8 +4,8 @@
       <div class="landingOverlay">
         <h1>Patreaion powers decentralized subscription systems</h1>
         <ul>
-          <li><a href='#whatis'>What is Patreaion?</a></li>
-          <li><a href=''>Post a subscription</a></li>
+          <li><router-link to="/#whatis">What is Patreaion?</router-link></li>
+          <li><router-link to="/post">Post a subscription</router-link></li>
         </ul>
       </div>
     </video-bg>
@@ -14,12 +14,12 @@
     </div>
     <div class="subscriptions">
       <h1>Active Subscriptions</h1>
-      <p>Take a look at some of our featured subscriptions. To get started, simply create a <a href='#' class='highlightLink'>new subscription contract</a>, and begin offering your service today.</p>
+      <p>Take a look at some of our featured subscriptions. To get started, simply create a <router-link to="/post" class='highlightLink'>new subscription contract</router-link>, and begin offering your service today.</p>
     </div>
     <div class="footer">
       <h1>Ready to get started?</h1>
       <p>Join the decentralized movement, and get connected to your fans today!</p>
-      <a href="#">Post a subscription</a>
+      <router-link to="/post">Post a subscription</router-link>
     </div>
     <div class="subFooter">
       <span> Patreaion | &copy; 2019 </span>

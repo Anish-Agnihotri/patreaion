@@ -63,6 +63,12 @@ app.get("/", (req, res) => {
     });
 });
 
+// define a route handler for the existing subscriptions
+app.get('/', (req, res) => {
+    res.json({
+        
+    });
+});
 // start the Express server
 app.listen(port, () => {
     console.log(`server started at http://localhost:${ port }`);

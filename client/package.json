@@ -8,9 +8,9 @@
   },
   "dependencies": {
     "vue": "^2.6.6",
+    "vue-form-wizard": "^0.8.4",
     "vue-router": "^3.0.1",
-    "vue-videobg": "^2.0.0",
-    "vuetify": "^1.5.5"
+    "vue-videobg": "^2.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",
