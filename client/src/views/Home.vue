@@ -4,18 +4,26 @@
       <div class="landingOverlay">
         <h1>Patreaion powers decentralized subscription systems</h1>
         <ul>
-          <li><a href=''>What is Patreaion?</a></li>
+          <li><a href='#whatis'>What is Patreaion?</a></li>
           <li><a href=''>Post a subscription</a></li>
         </ul>
       </div>
     </video-bg>
-    <!--<div class="subCTA">
-      <h2>Patreaion allows creators to have a direct relationship with their fans, get reccuring payments for your work, and create on your own terms - all while being completely decentralized.</h2>
+    <div id="whatis" class="subCTA">
+      <h2>Patreaion allows <span class="highlight">creators</span> to have a direct relationship with their fans, get <span class="highlight">reccuring</span> payments for your work, and create on your <span class="highlight">own terms</span> - all while being completely decentralized.</h2>
     </div>
     <div class="subscriptions">
       <h1>Active Subscriptions</h1>
-      <p>Take a look at some of our featured subscriptions. To get started, simply create a new subscription contract, and begin offering your service today.</p>
-    </div>-->
+      <p>Take a look at some of our featured subscriptions. To get started, simply create a <a href='#' class='highlightLink'>new subscription contract</a>, and begin offering your service today.</p>
+    </div>
+    <div class="footer">
+      <h1>Ready to get started?</h1>
+      <p>Join the decentralized movement, and get connected to your fans today!</p>
+      <a href="#">Post a subscription</a>
+    </div>
+    <div class="subFooter">
+      <span> Patreaion | &copy; 2019 </span>
+    </div>
   </div>
 </template>
 
@@ -56,7 +64,7 @@
     }
     li:nth-child(1) {
       a {
-        color: 40409a;
+        color: #40409a;
         background-color: #fff;
       }
     }
@@ -74,12 +82,13 @@
   .subCTA {
     width: 50vw;
     height: 180px;
-    background-color: #e6e6e6;
+    background-color: #ebebfa;
     text-align: center;
     padding-top: 20px;
     padding-left: 25vw;
     padding-right: 25vw;
     line-height: 1.6;
+    color: #000;
   }
   .subscriptions {
     width: 80vw;
@@ -100,10 +109,55 @@
   }
   .footer {
     width: 100vw;
-    height: 200px;
+    height: 180px;
     text-align: center;
     background-color: #40409a;
+    color: #fff;
+    h1 {
+      padding-top: 25px;
+    }
+    p {
+      margin-top: -20px;
+      padding-bottom: 10px;
+    }
+    a {
+      padding: 10px 20px 10px 20px;
+      border-radius: 25px;
+      border: 2px solid #fff;
+      color: #fff;
+      font-size: 18px;
+      text-decoration: none;
+      transition: 0.15s ease-in-out;
+      font-weight: 700;
+      margin-top: 10px;
+      margin-left: -10px;
+    }
+    a:hover {
+      background-color: #fff;
+      color: #40409a;
+    }
   }
+}
+.highlight {
+  color: #40409a !important;
+}
+.highlightLink {
+  text-decoration: none;
+  color: #000;
+  padding-bottom: 2px;
+  border-bottom: 1px dashed #40409a;
+  transition: 0.15s ease-in-out;
+}
+.highlightLink:hover {
+  padding-bottom: 0px;
+}
+.subFooter {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  color: #40409a;
 }
 </style>
 <script>
