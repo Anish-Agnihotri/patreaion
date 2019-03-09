@@ -21,6 +21,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Open Sans', sans-serif;
+  overflow-x: hidden;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

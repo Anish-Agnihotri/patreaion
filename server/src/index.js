@@ -1,10 +1,11 @@
 const express = require("express");
 const request = require("request");
-
+const cors = require("cors");
 const app = express();
 const port = 8082; // default port to listen
 
 
+/*
 // Home page statistics:
 let etherscanAion = 'https://api.cryptonator.com/api/ticker/aion-usd';
 let supply = 'https://api.alternative.me/v2/ticker/Aion/';
@@ -35,24 +36,7 @@ function getSupply() {
         aionSupply = JSON.parse(body)['data']['2062']['total_supply'];
     });
 }
-
-/*
-function BlockTime() {
-
-}
-
-function aionNetworkHash() {
-
-}
 */
-getPrice();
-getSupply();
-
-
-setInterval(function () {
-    getPrice();
-    getSupply();
-}, 30000)
 
 // define a route handler for the default home page
 app.get("/", (req, res) => {
@@ -64,9 +48,22 @@ app.get("/", (req, res) => {
 });
 
 // define a route handler for the existing subscriptions
-app.get('/', (req, res) => {
+app.get('/subscriptions', cors(), (req, res) => {
     res.json({
-        
+        0: {
+            sub_name: 'First sub name',
+            sub_description: 'First sub description',
+            sub_owner: 'First sub owner',
+            sub_amount: 'First sub amount',
+            sub_image: 'https://i.imgur.com/bg0MZPZ.jpg'
+        },
+        1: {
+            sub_name: 'Second sub name',
+            sub_description: 'Second sub description',
+            sub_owner: 'Second sub owner',
+            sub_amount: 'Second sub amount',
+            sub_image: 'https://i.imgur.com/bg0MZPZ.jpg'
+        }
     });
 });
 // start the Express server

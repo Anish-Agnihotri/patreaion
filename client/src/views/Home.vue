@@ -15,6 +15,45 @@
     <div class="subscriptions">
       <h1>Active Subscriptions</h1>
       <p>Take a look at some of our featured subscriptions. To get started, simply create a <router-link to="/post" class='highlightLink'>new subscription contract</router-link>, and begin offering your service today.</p>
+      <div id="existingSubs">
+        <div class="cards" v-for="subscription in subscriptions">
+          <div style="background-image: url('https://i.imgur.com/bg0MZPZ.jpg');">
+
+          </div>
+          <div>
+              <h2>{{ subscription.sub_name }}</h2>
+              <p>{{ subscription.sub_description }}</p>
+          </div>
+          <div>
+            <div>
+              <div style='width: 90%;'></div>
+            </div>
+          </div>
+          <div>
+            <a href="#">Subscribe</a>
+          </div>
+
+        </div>
+        <!-- A card 
+        <div class='cards'>
+          <div style='background-image: url('https://i.imgur.com/bg0MZPZ.jpg');'>
+
+          </div>
+          <div>
+            <h2>Some title</h2>
+            <p>Testing multi-line typing functionality for overflows.</p>
+          </div>
+          <div>
+            <div>
+              <div style='width: 90%;'></div>
+            </div>
+          </div>
+          <div>
+            <a href="#">Subscribe</a>
+          </div>
+        </div>-->
+
+      </div>
     </div>
     <div class="footer">
       <h1>Ready to get started?</h1>
@@ -29,6 +68,79 @@
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
+.cards {
+  width: 300px;
+  height: 400px;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 20px;
+  text-align: left;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.25);
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.25);
+  div:nth-child(1) {
+    width: 300px;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: inline-block;
+    margin: 0 !important;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  div:nth-child(2) {
+    width: 280px;
+    height: 150px;
+    display: inline-block;
+    margin: 0 !important;
+    padding: 0px 10px 0px 10px;
+    h2 {
+      color: #40409a;
+    }
+    p {
+      width: 100%;
+    }
+  }
+  div:nth-child(3) {
+    width: 300px;
+    height: 50px;
+    display: inline-block;
+    text-align: center;
+    div {
+      height: 20px;
+      width: 280px;
+      border-radius: 5px;
+      margin: 0px;
+      background-color: #ccc;
+      background-image: none !important;
+      div {
+        background-color: #40409a !important;
+        background-image: none;
+        height: 100%;
+        float: left;
+      }
+    }
+  }
+  div:nth-child(4) {
+    width: 300px;
+    height: 50px;
+    display: inline-block;
+    text-align: center;
+    a {
+      padding: 10px 100px 10px 100px;
+      border-radius: 5px;
+      border: 2px solid #40409a;
+      text-decoration: none;
+      color: #40409a;
+      transition: 0.15s ease-in-out;
+      font-weight: 700;
+    }
+    a:hover {
+      background-color: #40409a;
+      color: #fff;
+    }
+  }
+}
 .landingOverlay {
   background-color: #40409ab6;
   width: 40vw;
@@ -160,14 +272,22 @@
   color: #40409a;
 }
 </style>
-<script>
-// @ is an alias to /src
-import HomeStats from '@/components/HomeStats.vue'
 
+<script>
 export default {
   name: 'home',
-  components: {
-    HomeStats
+  data () {
+    return {
+      subscriptions: []
+    }
+  },
+  methods:{
+
+  },
+  created() {
+    this.$http.get('http://localhost:8082/subscriptions').then(function(data){
+      this.blogs = data.body;
+    })
   }
 }
 </script>
