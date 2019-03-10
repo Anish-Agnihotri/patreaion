@@ -16,7 +16,7 @@
       <h1>Active Subscriptions</h1>
       <p>Take a look at some of our featured subscriptions. To get started, simply create a <router-link to="/post" class='highlightLink'>new subscription contract</router-link>, and begin offering your service today.</p>
       <div id="existingSubs">
-        <div class="cards" v-for="subscription in subscriptions">
+        <div class="cards" v-for="subscription in subscriptions" v-bind:key="subscription.id">
           <div style="background-image: url('https://i.imgur.com/bg0MZPZ.jpg');">
 
           </div>
@@ -26,7 +26,7 @@
           </div>
           <div>
             <div>
-              <div style='width: 90%;'></div>
+              <div v-bind:style="{ width: subscription.sub_percentage }"></div>
             </div>
           </div>
           <div>
@@ -34,7 +34,7 @@
           </div>
 
         </div>
-        <!-- A card 
+        <!-- A card
         <div class='cards'>
           <div style='background-image: url('https://i.imgur.com/bg0MZPZ.jpg');'>
 
@@ -286,7 +286,7 @@ export default {
   },
   created() {
     this.$http.get('http://localhost:8082/subscriptions').then(function(data){
-      this.blogs = data.body;
+      this.subscriptions = data.body;
     })
   }
 }

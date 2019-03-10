@@ -51,17 +51,27 @@ app.get("/", (req, res) => {
 app.get('/subscriptions', cors(), (req, res) => {
     res.json({
         0: {
+            id: '0',
             sub_name: 'First sub name',
             sub_description: 'First sub description',
             sub_owner: 'First sub owner',
-            sub_amount: 'First sub amount',
+            sub_percentage: '80%',
             sub_image: 'https://i.imgur.com/bg0MZPZ.jpg'
         },
         1: {
+            id: '1',
             sub_name: 'Second sub name',
             sub_description: 'Second sub description',
             sub_owner: 'Second sub owner',
-            sub_amount: 'Second sub amount',
+            sub_percentage: '70%',
+            sub_image: 'https://i.imgur.com/bg0MZPZ.jpg'
+        },
+        2: {
+            id: '2',
+            sub_name: 'Ryans sub',
+            sub_description: 'Second sub description',
+            sub_owner: 'Second sub owner',
+            sub_percentage: '50%',
             sub_image: 'https://i.imgur.com/bg0MZPZ.jpg'
         }
     });
