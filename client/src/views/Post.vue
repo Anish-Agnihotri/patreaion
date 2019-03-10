@@ -110,7 +110,14 @@ import axios from 'axios';
             }
         },
       onComplete: function () {
-        this.$http.post('http://localhost:8082/new', data, {
+        var jSONObject = {
+          title: this.title,
+          description: this.description,
+          amount: this.amount,
+          txhash: this.replaceTX,
+          image: this.imageData
+        }
+        this.$http.post('http://localhost:8082/new', jSONObject, {
           emulateJSON: true
         })
       },

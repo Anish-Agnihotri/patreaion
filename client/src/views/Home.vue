@@ -280,7 +280,8 @@ export default {
   name: 'home',
   data () {
     return {
-      subscriptions: []
+      subscriptions: [],
+      pricing: []
     }
   },
   methods:{
@@ -288,7 +289,7 @@ export default {
   },
   created() {
     this.$http.get('http://localhost:8082/subscriptions').then(function(data){
-      this.subscriptions = data.body;
+      this.subscriptions = data.body['jsonSubscriptions'];
     })
   }
 }
