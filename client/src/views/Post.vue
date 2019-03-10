@@ -39,7 +39,12 @@
           <p>Now, we are going to deploy your contract.</p>
           <p>Upon accepting the prompt, your subscriptions contract will be generated, and ready to go! Then you can easily see your subscription in the Active subscriptions on the home page.</p>
         </tab-content>
-        <tab-content title="Share Subscription" icon="fa-settings">Yuhuuu! This seems pretty damn simple</tab-content>
+        <tab-content title="Confirm Subscription" icon="fa-settings">
+          <h1>You're good to go!</h1>
+          <p>Yup, that's it. Getting a subscription setup with Patreaion is as easy that. You can check out the home page now to see if your subscription has been added!</p>
+          <h5>Transaction information:</h5>
+          <span style="font-size: 12px; padding-bottom: 30px;">Transaction Hash: {{ replaceTX }}</span>
+        </tab-content>
       </form-wizard>
     </div>
   </div>
@@ -49,7 +54,8 @@
   export default {
     data() {
       return {
-        selectedFile: null
+        selectedFile: null,
+        replaceTX: null
       }
     },
     methods: {
@@ -69,11 +75,97 @@
       onComplete: function () {
         alert('Yay. Done!');
       },
-      beforeTabSwitch: function(){
+      beforeTabSwitch: async function(){
+        let simpleContract = aionweb3.eth.contract(
+[
+  {
+      "outputs": [],
+      "constant": false,
+      "payable": true,
+      "inputs": [],
+      "name": "pay",
+      "type": "function"
+  },
+  {
+      "outputs": [],
+      "constant": false,
+      "payable": false,
+      "inputs": [],
+      "name": "incrementCounter",
+      "type": "function"
+  },
+  {
+      "outputs": [
+          {
+              "name": "",
+              "type": "int128"
+          }
+      ],
+      "constant": true,
+      "payable": false,
+      "inputs": [],
+      "name": "getCount",
+      "type": "function"
+  },
+  {
+      "outputs": [],
+      "constant": false,
+      "payable": false,
+      "inputs": [],
+      "name": "decrementCounter",
+      "type": "function"
+  },
+  {
+      "outputs": [],
+      "payable": false,
+      "inputs": [
+          {
+              "name": "_initCount",
+              "type": "int128"
+          }
+      ],
+      "name": "",
+      "type": "constructor"
+  },
+  {
+      "outputs": [],
+      "inputs": [
+          {
+              "indexed": false,
+              "name": "counter",
+              "type": "bool"
+          }
+      ],
+      "name": "CounterIncreased",
+      "anonymous": false,
+      "type": "event"
+  },
+  {
+      "outputs": [],
+      "inputs": [
+          {
+              "indexed": false,
+              "name": "counter",
+              "type": "bool"
+          }
+      ],
+      "name": "CounterDecreased",
+      "anonymous": false,
+      "type": "event"
+  }
+]
+)
           let title = document.getElementsByClassName("titleSend")[0].value;
           let description = document.getElementsByClassName("descriptionSend")[0].value;
           let amount = document.getElementsByClassName('amountSend')[0].value;
           console.log(title + description + amount); // insert the metamask bullshit here.
+          let simple = simpleContract.at("0xa0c2e4ea426762de0676686ca7265ddc29c406dcd50125eeff2f71d5d7089325"); //sets contract instance
+          try {
+            const txHash = await simple.pay({ value: (1 * 10 ** 16) }); //instance, function name then params (value)
+            let replaceTX = txHash;
+          } catch(err) {
+            console.log(err);
+          }
           return true;
         }
       },
