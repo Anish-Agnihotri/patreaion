@@ -80,7 +80,8 @@ import axios from 'axios';
         description: null,
         amount: null,
         image: null,
-        imageData: ""
+        imageData: "",
+        percentage: "0%"
       }
     },
     methods: {
@@ -110,12 +111,15 @@ import axios from 'axios';
             }
         },
       onComplete: function () {
+        let randomInt = Math.round(Math.random()*10, 2) + 3;
         var jSONObject = {
-          title: this.title,
-          description: this.description,
+          id: randomInt,
+          sub_name: this.title,
+          sub_description: this.description,
           amount: this.amount,
           txhash: this.replaceTX,
-          image: this.imageData
+          sub_image: this.imageData,
+          sub_percentage: this.percentage
         }
         this.$http.post('http://localhost:8082/new', jSONObject, {
           emulateJSON: true

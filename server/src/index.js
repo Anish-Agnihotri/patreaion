@@ -54,8 +54,8 @@ app.get("/", cors(), (req, res) => {
     });
 });
 
-let jsonSubscriptions =  {
-    0: {
+let jsonSubscriptions =  [
+     {
         id: '0',
         sub_name: 'Uniswap',
         sub_description: 'Designed with simplicity in mind the Uniswap protocol provides an interface for seamless exchange of ERC20 tokens on Ethereum.',
@@ -63,7 +63,7 @@ let jsonSubscriptions =  {
         sub_percentage: '70%',
         sub_image: 'https://c.gitcoin.co/grants/f44f463328fbb8ebae169c2b2c0b42f7/hero.png'
     },
-    1: {
+    {
         id: '1',
         sub_name: 'MyCrypto',
         sub_description: 'MyCrypto is an open-source, client-side tool for interacting with the blockchain.',
@@ -71,7 +71,7 @@ let jsonSubscriptions =  {
         sub_percentage: '20%',
         sub_image: 'https://journalducoin.com/wp-content/uploads/2018/03/MyCrypto-Comment-creer-un-portefeuille-securise-pour-stocker-vos-ethereums-et-tokens-ERC-20.png'
     },
-    2: {
+    {
         id: '2',
         sub_name: 'Ryans sub',
         sub_description: 'Second sub description',
@@ -79,7 +79,8 @@ let jsonSubscriptions =  {
         sub_percentage: '50%',
         sub_image: 'https://i.imgur.com/bg0MZPZ.jpg'
     }
-}
+]
+
 // define a route handler for the existing subscriptions
 app.get('/subscriptions', cors(), (req, res) => {
     res.json({
@@ -87,12 +88,12 @@ app.get('/subscriptions', cors(), (req, res) => {
     });
 });
 
-
+app.use(bodyParser({limit: '50mb'}));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.post('/new', (req, res) => {
-  res.json(jsonSubscriptions.append(JSON.stringify(res.body)));
+  res.json(jsonSubscriptions.push(req.body));
 });
 
 // start the Express server
