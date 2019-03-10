@@ -5,7 +5,7 @@
     </div>
     <div class="formSection">
       <form-wizard @on-complete="onComplete" title="" subtitle="" shape="square" back-button-text="Go back!"
-        next-button-text="Go next!" finish-button-text="We're there" color="#40409a">
+        next-button-text="Go next!" finish-button-text="Publish Subscription" color="#40409a">
         <tab-content title="Setup Subscription" icon="ti-user">
           <div class="firstSub">
             <h1>Configure your subscription</h1>
@@ -22,19 +22,24 @@
                 <h5>What is your monthly donation target? (in Aion)</h5>
                 <p class='text'></p>
                 <input type="number" name="amount" min="0" class='desiredNumber amountSend' @change="onNumChanged"/>
-                <p style="font-size: 12px;">Estimated USD: $<span class='outputNumber'></span></p>
+                <p style="font-size: 12px;">Estimated USD: ${{ price }}</p>
               </div>
               <div>
                 <h5>Do you have an image for your subscription offering?</h5>
                 <div>
-                  <input type="file" @change="onFileChanged">
-                  <button @click="onUpload">Upload!</button>
+                  <div class="file-upload-form">
+                      Upload an image file:
+                      <input type="file" @change="previewImage" accept="image/*">
+                  </div>
+                  <div class="image-preview" v-if="imageData.length > 0">
+                      <img class="preview" :src="imageData">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </tab-content>
-        <tab-content title="Deply Contract" icon="ti-settings" :before-change="beforeTabSwitch">
+        <tab-content title="Deploy Contract" icon="ti-settings" :before-change="beforeTabSwitch">
           <h1>Aiwa authentication</h1>
           <p>Now, we are going to deploy your contract.</p>
           <p>Upon accepting the prompt, your subscriptions contract will be generated, and ready to go! Then you can easily see your subscription in the Active subscriptions on the home page.</p>
@@ -42,8 +47,18 @@
         <tab-content title="Confirm Subscription" icon="fa-settings">
           <h1>You're good to go!</h1>
           <p>Yup, that's it. Getting a subscription setup with Patreaion is as easy that. You can check out the home page now to see if your subscription has been added!</p>
-          <h5>Transaction information:</h5>
-          <span style="font-size: 12px; padding-bottom: 30px;">Transaction Hash: {{ replaceTX }}</span>
+          <h5>Transaction information: {{ image }}</h5>
+          <div style='padding-bottom: 25px;'>
+            <img style='width: 200px;':src="imageData" />
+            </br>
+            <span style="font-size: 12px; padding-bottom: 30px;"><strong>Transaction hash</strong>: {{ replaceTX }}</span>
+            </br>
+            <span style="font-size: 12px; padding-bottom: 30px;"><strong>Subscription title</strong>: {{ title }}</span>
+            </br>
+            <span style="font-size: 12px; padding-bottom: 30px;"><strong>Subscription description</strong>: {{ description }}</span>
+            </br>
+            <span style="font-size: 12px; padding-bottom: 30px;"><strong>Subscription amount</strong>: {{ amount }} AION</span>
+          </div>
         </tab-content>
       </form-wizard>
     </div>
@@ -51,29 +66,53 @@
 </template>
 
 <script>
+import axios from 'axios';
   export default {
+    components: {
+      axios
+    },
     data() {
       return {
         selectedFile: null,
-        replaceTX: null
+        price: null,
+        replaceTX: null,
+        title: null,
+        description: null,
+        amount: null,
+        image: null,
+        imageData: ""
       }
     },
     methods: {
-      onFileChanged(event) {
-        this.selectedFile = event.target.files[0]
-      },
       onNumChanged(event) {
         let desired = document.getElementsByClassName('desiredNumber')[0].value;
         this.$http.get('http://localhost:8082/').then(function(data){
           let currentPrice = data.body['aion_price'];
           let converted = (desired*currentPrice).toFixed(2);
+          this.price = converted;
         })
       },
-      onUpload() {
-        console.log(this.selectedFile);
-      },
+      previewImage: function(event) {
+            // Reference to the DOM input element
+            var input = event.target;
+            // Ensure that you have a file before attempting to read it
+            if (input.files && input.files[0]) {
+                // create a new FileReader to read this image and convert to base64 format
+                var reader = new FileReader();
+                // Define a callback function to run, when FileReader finishes its job
+                reader.onload = (e) => {
+                    // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
+                    // Read image as base64 and set to imageData
+                    this.imageData = e.target.result;
+                }
+                // Start the reader job - read file as a data url (base64 format)
+                reader.readAsDataURL(input.files[0]);
+            }
+        },
       onComplete: function () {
-        alert('Yay. Done!');
+        this.$http.post('http://localhost:8082/new', data, {
+          emulateJSON: true
+        })
       },
       beforeTabSwitch: async function(){
         let simpleContract = aionweb3.eth.contract(
@@ -155,14 +194,13 @@
   }
 ]
 )
-          let title = document.getElementsByClassName("titleSend")[0].value;
-          let description = document.getElementsByClassName("descriptionSend")[0].value;
-          let amount = document.getElementsByClassName('amountSend')[0].value;
-          console.log(title + description + amount); // insert the metamask bullshit here.
+          this.title = document.getElementsByClassName("titleSend")[0].value;
+          this.description = document.getElementsByClassName("descriptionSend")[0].value;
+          this.amount = document.getElementsByClassName('amountSend')[0].value;
           let simple = simpleContract.at("0xa0c2e4ea426762de0676686ca7265ddc29c406dcd50125eeff2f71d5d7089325"); //sets contract instance
           try {
             const txHash = await simple.pay({ value: (1 * 10 ** 16) }); //instance, function name then params (value)
-            let replaceTX = txHash;
+            this.replaceTX = txHash;
           } catch(err) {
             console.log(err);
           }

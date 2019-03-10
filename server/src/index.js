@@ -1,6 +1,7 @@
 const express = require("express");
 const request = require("request");
 const cors = require("cors");
+var bodyParser = require('body-parser');
 const app = express();
 const port = 8082; // default port to listen
 
@@ -82,6 +83,15 @@ app.get('/subscriptions', cors(), (req, res) => {
         }
     });
 });
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.post('/new', (req, res) => {
+  res.json(console.log("this is working" + ' ' + req.body));
+});
+
 // start the Express server
 app.listen(port, () => {
     console.log(`server started at http://localhost:${ port }`);
