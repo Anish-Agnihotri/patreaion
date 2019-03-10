@@ -57,27 +57,27 @@ app.get("/", cors(), (req, res) => {
 let jsonSubscriptions =  [
      {
         id: '0',
-        sub_name: 'Uniswap',
-        sub_description: 'Designed with simplicity in mind the Uniswap protocol provides an interface for seamless exchange of ERC20 tokens on Ethereum.',
+        sub_name: 'The Open Blockchain',
+        sub_description: 'Support Andreas M. Antonopoulos\' open blockchain seminars by contiuning to keep them sponsor-free.',
         sub_owner: 'Anish',
-        sub_percentage: '70%',
-        sub_image: 'https://c.gitcoin.co/grants/f44f463328fbb8ebae169c2b2c0b42f7/hero.png'
+        sub_percentage: '90%',
+        sub_image: 'https://bitcoinist.com/wp-content/uploads/2016/12/antonop.jpg'
     },
     {
         id: '1',
-        sub_name: 'MyCrypto',
-        sub_description: 'MyCrypto is an open-source, client-side tool for interacting with the blockchain.',
+        sub_name: 'MKBHD Tech Reviews',
+        sub_description: ' Support Marques Brownlee to fund and support future meetups, conferences, and tech reviews.',
         sub_owner: 'Anish',
         sub_percentage: '20%',
-        sub_image: 'https://journalducoin.com/wp-content/uploads/2018/03/MyCrypto-Comment-creer-un-portefeuille-securise-pour-stocker-vos-ethereums-et-tokens-ERC-20.png'
+        sub_image: 'https://ioneblackamericaweb.files.wordpress.com/2016/09/marquesbrownleess.png?w=560&h=320&crop=1'
     },
     {
         id: '2',
-        sub_name: 'Ryans sub',
-        sub_description: 'Second sub description',
+        sub_name: 'SETI@Home',
+        sub_description: 'Donate and voice your support for SETI, and support their work in understanding the nature of life.',
         sub_owner: 'Second sub owner',
         sub_percentage: '50%',
-        sub_image: 'https://i.imgur.com/bg0MZPZ.jpg'
+        sub_image: 'https://cdn.cnn.com/cnnnext/dam/assets/150103074330-hubble-space-background-2-full-169.jpg'
     }
 ]
 
