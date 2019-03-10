@@ -52,19 +52,19 @@ app.get('/subscriptions', cors(), (req, res) => {
     res.json({
         0: {
             id: '0',
-            sub_name: 'First sub name',
-            sub_description: 'First sub description',
-            sub_owner: 'First sub owner',
-            sub_percentage: '80%',
-            sub_image: 'https://i.imgur.com/bg0MZPZ.jpg'
+            sub_name: 'Uniswap',
+            sub_description: 'Designed with simplicity in mind the Uniswap protocol provides an interface for seamless exchange of ERC20 tokens on Ethereum.',
+            sub_owner: 'Anish',
+            sub_percentage: '70%',
+            sub_image: 'https://c.gitcoin.co/grants/f44f463328fbb8ebae169c2b2c0b42f7/hero.png'
         },
         1: {
             id: '1',
-            sub_name: 'Second sub name',
-            sub_description: 'Second sub description',
-            sub_owner: 'Second sub owner',
-            sub_percentage: '70%',
-            sub_image: 'https://i.imgur.com/bg0MZPZ.jpg'
+            sub_name: 'MyCrypto',
+            sub_description: 'MyCrypto is an open-source, client-side tool for interacting with the blockchain.',
+            sub_owner: 'Anish',
+            sub_percentage: '20%',
+            sub_image: 'https://journalducoin.com/wp-content/uploads/2018/03/MyCrypto-Comment-creer-un-portefeuille-securise-pour-stocker-vos-ethereums-et-tokens-ERC-20.png'
         },
         2: {
             id: '2',

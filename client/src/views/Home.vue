@@ -17,7 +17,7 @@
       <p>Take a look at some of our featured subscriptions. To get started, simply create a <router-link to="/post" class='highlightLink'>new subscription contract</router-link>, and begin offering your service today.</p>
       <div id="existingSubs">
         <div class="cards" v-for="subscription in subscriptions" v-bind:key="subscription.id">
-          <div style="background-image: url('https://i.imgur.com/bg0MZPZ.jpg');">
+          <div v-bind:style="{ backgroundImage: 'url(' + subscription.sub_image + ')' }">
 
           </div>
           <div>
@@ -99,6 +99,8 @@
     }
     p {
       width: 100%;
+      margin-top: -20px !important;
+      line-height: 1.1;
     }
   }
   div:nth-child(3) {
