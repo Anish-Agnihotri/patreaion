@@ -5,28 +5,36 @@ const app = express();
 const port = 8082; // default port to listen
 
 
-/*
 // Home page statistics:
 let etherscanAion = 'https://api.cryptonator.com/api/ticker/aion-usd';
-let supply = 'https://api.alternative.me/v2/ticker/Aion/';
-let blockTime = '';
-let networkHash = '';
-
 let aionPrice;
-let aionChange;
-let aionSupply;
-let aionBlockTime;
-let aioNetworkHash;
-
 function getPrice() {
     request.get(etherscanAion, (error, response, body) => {
         if (error) {
             return console.log('There has been an error! Please contact support.');
         }
         aionPrice = JSON.parse(body)['ticker']['price'];
-        aionChange = JSON.parse(body)['ticker']['change'];
     });
 }
+
+getPrice();
+
+setInterval(function(){
+    getPrice();
+  }, 30000);
+/*
+
+let supply = 'https://api.alternative.me/v2/ticker/Aion/';
+let blockTime = '';
+let networkHash = '';
+
+
+let aionChange;
+let aionSupply;
+let aionBlockTime;
+let aioNetworkHash;
+
+
 
 function getSupply() {
     request.get(supply, (error, response, body) => {
@@ -39,11 +47,9 @@ function getSupply() {
 */
 
 // define a route handler for the default home page
-app.get("/", (req, res) => {
+app.get("/", cors(), (req, res) => {
     res.json({
         aion_price: aionPrice,
-        aion_change: aionChange,
-        aion_supply: aionSupply,
     });
 });
 
